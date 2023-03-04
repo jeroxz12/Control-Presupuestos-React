@@ -64,13 +64,12 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
           <select id="categoria"value={categoria} onChange={(e) => setCategoria(e.target.value)}>
             <option value="">---Seleccione una Categoría---</option>
             <option value="comida">Comida</option>
-            <option value="ahorros">Ahorros</option>
-            <option value="ropa">Ropa</option>
-            <option value="Salidas">Salida</option>
-            <option value="Sueldo">Sueldo</option>
-            <option value="transporte">Transporte</option>
+            <option value="ahorro">Ahorros</option>
+            <option value="casa">Casa</option>
+            <option value="ocio">Ocio</option>
             <option value="salud">Salud</option>
             <option value="suscripciones">Suscripciones</option>
+            <option value="gastos">Gastos</option>
           </select>
 
         </div>

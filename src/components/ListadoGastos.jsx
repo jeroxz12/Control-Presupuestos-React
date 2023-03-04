@@ -10,9 +10,7 @@ const ListadoGastos = ({gastos}) => {
          {gastos.map( gasto  => 
             <Gasto
                 key = { gasto.id}
-                nombre = { gasto.nombre }
-                cantidad = { gasto.cantidad } 
-                categoria = { gasto.categoria }
+                gasto = { gasto }
             />
          )}   
     </div>

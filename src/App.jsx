@@ -21,6 +21,7 @@ function App() {
 
   const guardarGasto = (gasto) => {
     gasto.id = generarId();
+    gasto.fecha = Date.now();
     setGastos([...gastos, gasto]);
     setAnimarModal(false)
     setTimeout(() => {
@@ -41,12 +42,14 @@ function App() {
   };
 
   return (
-    <div>
+    <div className={modal ? 'fijar' : ''}>
       <Header
         presupuesto={presupuesto}
         setPresupuesto={setPresupuesto}
         isValidPresupuesto={isValidPresupuesto}
-        setIsValidPresupuesto={setIsValidPresupuesto} />
+        setIsValidPresupuesto={setIsValidPresupuesto}
+        gastos = { gastos }
+        />
 
       { isValidPresupuesto && (
       
