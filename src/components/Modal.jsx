@@ -1,20 +1,32 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Mensaje from './Mensaje';
 
 import IconoCerrarModal from '../assets/img/cerrar.svg'
-const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
+const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEditar, setGastoEditar }) => {
 
   const [mensaje, setMensaje] = useState('');
 
   const [nombre, setNombre] = useState('')
   const [cantidad, setCantidad ] = useState(0)
   const [categoria, setCategoria ] = useState('')
+  const [fecha, setFecha] = useState('')
+  const [id, setId] = useState('');
 
-  
+  useEffect( () => {
+    if ( Object.keys( gastoEditar) .length > 0){
+      setNombre(gastoEditar.nombre);
+      setCantidad(gastoEditar.cantidad);
+      setCategoria(gastoEditar.categoria);
+      setFecha(gastoEditar.fecha)
+      setId(gastoEditar.id);
+    }
+  }, [ ]);
+
   const ocultarModal = () => {
     setAnimarModal(false)
+    setGastoEditar({})
     setTimeout(() => {
       setModal(false)
     }, 500);
@@ -31,12 +43,8 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
         return;
       }
 
-      const nuevoGasto = {
-        nombre: nombre,
-        cantidad: cantidad,
-        categoria: categoria
-      }
-      guardarGasto(nuevoGasto);
+      
+      guardarGasto({nombre,cantidad,categoria,id,fecha});
   }
 
   return (
@@ -47,7 +55,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
       </div>
 
       <form className={`formulario ${animarModal ? "animar" : 'cerrar'}`} onSubmit={handleSubmit} >
-        <legend>Nuevo Gasto</legend>
+      <legend>{gastoEditar.nombre ? 'Editar Gasto' : 'Nuevo Gasto'}</legend>
 
         <div className="campo">
           <label htmlFor="nombre">Ingresa el nombre del  gasto:</label>
@@ -77,7 +85,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
         { mensaje && <Mensaje 
           tipo = 'error'
         >{mensaje}</Mensaje>}
-        <input type="submit" value="Añadir Gasto" />
+        <input type="submit" value= { gastoEditar.nombre ? 'Actualizar Gasto' : 'Añadir Gasto'} />
       </form>
 
     </div>
